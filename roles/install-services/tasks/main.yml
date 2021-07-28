@@ -1,0 +1,15 @@
+
+- name: Create check-restart-processes.service service
+  template:
+    src: check_restart_processes.service.j2
+    dest: /etc/systemd/system/check_restart_processes.service
+    owner: root
+    group: root
+    force: no
+
+
+- name: Start check_restart_processes service
+  service:
+    name: check_restart_processes
+    enabled: yes
+    state: started

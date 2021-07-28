@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+	exit 1
+else
+	echo "installing $1.service"
+fi
+
+echo "[Unit]" > "/etc/systemd/system/$1.service"
+echo "Description=$1" >> "/etc/systemd/system/$1.service"
+echo "" >> "/etc/systemd/system/$1.service"
+echo "[Service]" >> "/etc/systemd/system/$1.service"
+echo "User=exchange" >> "/etc/systemd/system/$1.service"
+echo "SyslogIdentifier=$1" >> "/etc/systemd/system/$1.service"
+echo "Group=exchange" >> "/etc/systemd/system/$1.service"
+echo "WorkingDirectory=/opt/$1/" >> "/etc/systemd/system/$1.service"
+echo "ExecStart= /opt/$1/run.sh" >> "/etc/systemd/system/$1.service"
+echo "SuccessExitStatus=143" >> "/etc/systemd/system/$1.service"
+echo "TimeoutStopSec=60" >> "/etc/systemd/system/$1.service"
+echo "Restart=on-failure" >> "/etc/systemd/system/$1.service"
+echo "RestartSec=5" >> "/etc/systemd/system/$1.service"
+echo "" >> "/etc/systemd/system/$1.service"
+echo "[Install]" >> "/etc/systemd/system/$1.service"
+echo "WantedBy=multi-user.target" >> "/etc/systemd/system/$1.service"
+
+systemctl daemon-reload

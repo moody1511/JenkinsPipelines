@@ -1,0 +1,26 @@
+- name: Create deleteservice.sh
+  template:
+    src: deleteservice.sh.j2
+    dest: /opt/deleteservice.sh
+    owner: root
+    group: root
+    force: no
+    mode: 0700
+
+- name: Create installservice.sh
+  template:
+    src: installservice.sh.j2
+    dest: /opt/installservice.sh
+    owner: root
+    group: root
+    force: no
+    mode: 0700
+
+- name: Create log_zipper.sh
+  template:
+    src: logger.sh.j2
+    dest: /opt/logger.sh
+    owner: root
+    group: root
+    force: no
+    mode: 0755

@@ -1,0 +1,7 @@
+- name: Restore previous sshd config before setup
+  shell: sed -i '/^Match Group root,sudo,cert,docker/!b;n;c\ \AuthenticationMethods publickey' /etc/ssh/sshd_config
+
+- name: Service sshd restart
+  service:
+    name: sshd
+    state: restarted

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo $(date +"%m-%d-%y %T") - Started zipper >> /opt/logger.log
+
+for d in /opt/* ; do
+  if [[ $d == *"test5"* ]];
+  then
+    cd $d/log
+    echo $(date +"%m-%d-%y %T") - Started ziping >> logger.log
+    if gzip test5-`echo $(date -d "1 day ago" +'%m-%d-%Y')`.log 2>> logger.log ; then
+      echo $(date +"%m-%d-%y %T") - Finished ziping >> logger.log
+    else
+      echo $(date +"%m-%d-%y %T") - Failed zip log >> logger.log
+    fi
+  elif [[ $d == *"test1"* ]];
+  then
+    cd $d/log
+    echo $(date +"%m-%d-%y %T") - Started ziping >> logger.log
+    if gzip test1-`echo $(date -d "1 day ago" +'%m-%d-%Y')`.log 2>> logger.log ; then
+      echo $(date +"%m-%d-%y %T") - Finished ziping >> logger.log
+    else
+      echo $(date +"%m-%d-%y %T") - Failed zip log >> logger.log
+    fi
+  elif [[ $d == *"test2"* || $d == *"test3"* || $d == *"test4"* ]];
+  then
+    cd $d/log
+    echo $(date +"%m-%d-%y %T") - Started ziping >> logger.log
+    if gzip test2-`echo $(date -d "1 day ago" +'%m-%d-%Y')`.log 2>> logger.log ; then
+      echo $(date +"%m-%d-%y %T") - Finished ziping >> logger.log
+    else
+      echo $(date +"%m-%d-%y %T") - Failed zip log >> logger.log
+    fi
+  fi
+done

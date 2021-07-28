@@ -1,0 +1,18 @@
+#!/bin/bash 
+ 
+if [ -z "$1" ]
+  then
+    echo "Please provide service name"
+    exit 2
+fi
+
+echo "Stoping and disabling service $1"
+sudo systemctl stop $1.service
+sudo systemctl disable $1.service
+
+echo "Deleteting service and folders"
+rm -rf /etc/systemd/system/$1.service
+rm -rf /opt/$1
+rm -rf /var/log/exchange/$1
+
+echo "Done removing $1"

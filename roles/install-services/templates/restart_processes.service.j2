@@ -1,0 +1,15 @@
+[Unit]
+Description=restart_processes
+
+[Service]
+User=exchange
+SyslogIdentifier=restart_processes.py
+WorkingDirectory=/tmp
+ExecStart=/opt/tmptest1.py
+SuccessExitStatus=143
+TimeoutStopSec=60
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
